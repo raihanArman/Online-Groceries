@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Online-Groceries</string>
+    <string name="onboard_title">Welcome to our store</string>
+    <string name="onboard_subtitle">Get your groceries in as fast as one hour</string>
+    <string name="get_started">Get Started</string>
+    <string name="logo_title">nectar</string>
+    <string name="logo_subtitle">Online Groceries</string>
+</resources>
