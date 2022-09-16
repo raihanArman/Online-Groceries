@@ -2,6 +2,7 @@ package com.randev.online_groceries.feature.screen.auth.sign_in
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,14 +12,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.randev.online_groceries.R
+import com.randev.online_groceries.navigation.Screen
 import com.randev.online_groceries.ui.components.button.SocialMediaButton
 import com.randev.online_groceries.ui.components.text.TitleText
 import com.randev.online_groceries.ui.components.textfield.TextFieldPhoneNumber
@@ -34,28 +39,37 @@ import com.randev.online_groceries.ui.theme.TextGreyColor
  */
 
 @Composable
-fun SignInScreen() {
+fun SignInScreen(
+    navHostController: NavHostController
+) {
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxSize()
+            .fillMaxSize(),
+        contentAlignment = Alignment.BottomCenter
     ) {
-        Column {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+        ){
             Image(
                 painter = painterResource(id = R.drawable.bg_sign_in),
-                contentDescription = null
+                contentDescription = null,
             )
-            FieldSignIn()
         }
+        FieldSignIn(
+            navHostController = navHostController
+        )
     }
 }
 
 @Composable
 fun FieldSignIn(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(25.dp),
     ) {
         TitleText(
@@ -69,7 +83,8 @@ fun FieldSignIn(
                 .fillMaxWidth(),
             text = "",
             onTextChanged = {},
-            onFlagClick = {}
+            onFlagClick = {},
+            readOnly = true
         )
         VerticalSpace(height = 40.dp)
         Text(
@@ -82,7 +97,9 @@ fun FieldSignIn(
         )
         VerticalSpace(height = 37.dp)
         SocialMediaButton(
-            onClick = {},
+            onClick = {
+                navHostController.navigate(Screen.FieldNumber.route)
+            },
             text = "Continue with Google",
             imageResource = R.drawable.ic_google,
             backgroundColor = GoogleColor
@@ -102,6 +119,6 @@ fun FieldSignIn(
 @Composable
 fun PreviewSignInScreen() {
     OnlineGroceriesTheme {
-        SignInScreen()
+        SignInScreen(navHostController = NavHostController(LocalContext.current))
     }
 }

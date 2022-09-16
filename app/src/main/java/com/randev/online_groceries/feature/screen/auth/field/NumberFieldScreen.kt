@@ -16,10 +16,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.randev.online_groceries.R
+import com.randev.online_groceries.navigation.Screen
+import com.randev.online_groceries.ui.components.button.BackButton
 import com.randev.online_groceries.ui.components.textfield.TextFieldPhoneNumber
 import com.randev.online_groceries.ui.components.text.TitleText
 import com.randev.online_groceries.ui.core.VerticalSpace
@@ -31,7 +35,9 @@ import com.randev.online_groceries.ui.theme.OnlineGroceriesTheme
  */
 
 @Composable
-fun NumberFieldScreen() {
+fun NumberFieldScreen(
+    navHostController: NavHostController
+) {
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -52,11 +58,10 @@ fun NumberFieldScreen() {
                         .fillMaxWidth()
                         .padding(start = 25.dp, end = 25.dp, top = 50.dp)
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_baseline_arrow_back_ios_new_24),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .clickable {  }
+                    BackButton(
+                        onClick = {
+                            navHostController.popBackStack()
+                        }
                     )
                     VerticalSpace(height = 65.dp)
                     TitleText(text = "Enter your mobile number")
@@ -75,7 +80,9 @@ fun NumberFieldScreen() {
             floatingActionButton = {
                 FloatingActionButton(
                     backgroundColor = MaterialTheme.colors.primary,
-                    onClick = {}
+                    onClick = {
+                        navHostController.navigate(Screen.FieldOtp.route)
+                    }
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_baseline_arrow_forward_ios_24),
@@ -93,6 +100,6 @@ fun NumberFieldScreen() {
 @Composable
 fun PreviewNumberFieldScreen() {
     OnlineGroceriesTheme {
-        NumberFieldScreen()
+        NumberFieldScreen(navHostController = NavHostController(LocalContext.current))
     }
 }

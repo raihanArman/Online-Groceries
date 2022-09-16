@@ -40,10 +40,11 @@ fun TextFieldPhoneNumber(
     text: String,
     onTextChanged: (String) -> Unit,
     onFlagClick: () -> Unit,
-    backgroundColor: Color = Color.White
+    backgroundColor: Color = Color.White,
+    readOnly: Boolean = false
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier,
     ) {
         if(title != null) Text(
             text = title,
@@ -61,6 +62,7 @@ fun TextFieldPhoneNumber(
                 backgroundColor = backgroundColor,
                 unfocusedIndicatorColor = BorderColor
             ),
+            readOnly = readOnly,
             leadingIcon = {
                 Box(
                     modifier = Modifier

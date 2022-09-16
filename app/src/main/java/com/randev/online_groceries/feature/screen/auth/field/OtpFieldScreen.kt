@@ -22,11 +22,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.randev.online_groceries.R
+import com.randev.online_groceries.navigation.Screen
+import com.randev.online_groceries.ui.components.button.BackButton
 import com.randev.online_groceries.ui.components.text.TitleText
 import com.randev.online_groceries.ui.components.textfield.TextFieldCustom
 import com.randev.online_groceries.ui.components.textfield.TextFieldPhoneNumber
@@ -39,7 +43,9 @@ import com.randev.online_groceries.ui.theme.OnlineGroceriesTheme
  */
 
 @Composable
-fun OtpFieldScreen() {
+fun OtpFieldScreen(
+    navHostController: NavHostController
+) {
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -60,11 +66,10 @@ fun OtpFieldScreen() {
                         .fillMaxWidth()
                         .padding(start = 25.dp, end = 25.dp, top = 50.dp)
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_baseline_arrow_back_ios_new_24),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .clickable {  }
+                    BackButton(
+                        onClick = {
+                            navHostController.popBackStack()
+                        }
                     )
                     VerticalSpace(height = 65.dp)
                     TitleText(text = "Enter your 4-digit code")
@@ -100,7 +105,9 @@ fun OtpFieldScreen() {
                     }
                     FloatingActionButton(
                         backgroundColor = MaterialTheme.colors.primary,
-                        onClick = {}
+                        onClick = {
+                            navHostController.navigate(Screen.SelectLocation.route)
+                        }
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_baseline_arrow_forward_ios_24),
@@ -118,6 +125,6 @@ fun OtpFieldScreen() {
 @Composable
 fun PreviewOtpFieldScreen() {
     OnlineGroceriesTheme {
-        OtpFieldScreen()
+        OtpFieldScreen(navHostController = NavHostController(LocalContext.current))
     }
 }
