@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -42,6 +44,9 @@ import com.randev.online_groceries.ui.theme.TextGreyColor
 fun SignInScreen(
     navHostController: NavHostController
 ) {
+
+    val text = remember { mutableStateOf("") }
+
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -58,7 +63,11 @@ fun SignInScreen(
             )
         }
         FieldSignIn(
-            navHostController = navHostController
+            navHostController = navHostController,
+            text = text.value,
+            onTextChanged = {
+                text.value = it
+            }
         )
     }
 }
@@ -66,7 +75,9 @@ fun SignInScreen(
 @Composable
 fun FieldSignIn(
     modifier: Modifier = Modifier,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    text: String,
+    onTextChanged: (String) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -81,8 +92,8 @@ fun FieldSignIn(
         TextFieldPhoneNumber(
             modifier = Modifier
                 .fillMaxWidth(),
-            text = "",
-            onTextChanged = {},
+            text = text,
+            onTextChanged = onTextChanged,
             onFlagClick = {},
             readOnly = true
         )

@@ -8,9 +8,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.randev.online_groceries.R
+import com.randev.online_groceries.data.Country
+import com.randev.online_groceries.data.DummyDataCountry
 import com.randev.online_groceries.navigation.Screen
 import com.randev.online_groceries.navigation.navigateAndReplaceStartRoute
 import com.randev.online_groceries.navigation.popUpToTop
@@ -33,16 +43,28 @@ import com.randev.online_groceries.ui.components.text.TitleText
 import com.randev.online_groceries.ui.components.textfield.TextFieldCustom
 import com.randev.online_groceries.ui.core.VerticalSpace
 import com.randev.online_groceries.ui.theme.OnlineGroceriesTheme
+import kotlinx.coroutines.launch
 
 /**
  * @author Raihan Arman
  * @date 16/09/22
  */
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SelectLocationScreen(
     navHostController: NavHostController
 ) {
+
+    val coroutineScope = rememberCoroutineScope()
+    val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    var countrySelected: Country? by remember {
+        mutableStateOf(null)
+    }
+    var countrySearchQuery by remember {
+        mutableStateOf("")
+    }
+
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -85,7 +107,7 @@ fun SelectLocationScreen(
             DescriptionText(
                 modifier = Modifier
                     .width(324.dp),
-                text = "Swithch on your location to stay in tune with what’s happening in your area",
+                text = "Switch on your location to stay in tune with what’s happening in your area",
                 textSize = 16.sp,
                 textAlign = TextAlign.Center
             )
@@ -97,11 +119,15 @@ fun SelectLocationScreen(
                 title = "Your Zone",
                 trailingIcon = {
                     IconButton(
-                        onClick = {}
+                        onClick = {
+                            coroutineScope.launch {
+                                sheetState.show()
+                            }
+                        }
                     ) {
                         IconDropdown()
                     }
-                }
+                },
             )
             VerticalSpace(height = 30.dp)
             TextFieldCustom(
@@ -126,6 +152,28 @@ fun SelectLocationScreen(
             )
         }
     }
+
+    CountryPicker(
+        sheetState = sheetState,
+        backgroundContent = { /*TODO*/ },
+        countrySearchQuery = countrySearchQuery,
+        onCountrySelected = {
+            countrySelected = it
+            coroutineScope.launch {
+                sheetState.hide()
+            }
+        },
+        countryList = DummyDataCountry.countryList().filter {
+            it.name.contains(
+                other = countrySearchQuery,
+                ignoreCase = true
+            )
+        },
+        onQueryUpdated = {
+            countrySearchQuery = it
+        }
+    )
+
 }
 
 @Composable
