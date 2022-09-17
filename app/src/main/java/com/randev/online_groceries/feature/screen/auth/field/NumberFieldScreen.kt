@@ -8,13 +8,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -24,24 +30,38 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.randev.online_groceries.R
+import com.randev.online_groceries.data.Country
+import com.randev.online_groceries.data.DummyDataCountry
+import com.randev.online_groceries.feature.screen.auth.location.CountryPicker
 import com.randev.online_groceries.navigation.Screen
 import com.randev.online_groceries.ui.components.button.BackButton
 import com.randev.online_groceries.ui.components.textfield.TextFieldPhoneNumber
 import com.randev.online_groceries.ui.components.text.TitleText
 import com.randev.online_groceries.ui.core.VerticalSpace
 import com.randev.online_groceries.ui.theme.OnlineGroceriesTheme
+import kotlinx.coroutines.launch
 
 /**
  * @author Raihan Arman
  * @date 14/09/22
  */
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun NumberFieldScreen(
     navHostController: NavHostController
 ) {
 
     val phoneNumberValue = remember {
+        mutableStateOf("")
+    }
+
+    val coroutineScope = rememberCoroutineScope()
+    val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    var countrySelected: Country by remember {
+        mutableStateOf(DummyDataCountry.countryList()[0])
+    }
+    var countrySearchQuery by remember {
         mutableStateOf("")
     }
 
@@ -82,7 +102,12 @@ fun NumberFieldScreen(
                         onTextChanged = {
                             phoneNumberValue.value = it
                         },
-                        onFlagClick = {},
+                        onFlagClick = {
+                            coroutineScope.launch {
+                                sheetState.show()
+                            }
+                        },
+                        country = countrySelected
                     )
                 }
             },
@@ -102,6 +127,27 @@ fun NumberFieldScreen(
             }
         )
     }
+
+    CountryPicker(
+        sheetState = sheetState,
+        backgroundContent = { /*TODO*/ },
+        countrySearchQuery = countrySearchQuery,
+        onCountrySelected = {
+            countrySelected = it
+            coroutineScope.launch {
+                sheetState.hide()
+            }
+        },
+        countryList = DummyDataCountry.countryList().filter {
+            it.name.contains(
+                other = countrySearchQuery,
+                ignoreCase = true
+            )
+        },
+        onQueryUpdated = {
+            countrySearchQuery = it
+        }
+    )
 }
 
 

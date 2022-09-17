@@ -56,14 +56,7 @@ fun SelectLocationScreen(
     navHostController: NavHostController
 ) {
 
-    val coroutineScope = rememberCoroutineScope()
-    val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
-    var countrySelected: Country? by remember {
-        mutableStateOf(null)
-    }
-    var countrySearchQuery by remember {
-        mutableStateOf("")
-    }
+
 
     Box(
         modifier = Modifier
@@ -120,9 +113,7 @@ fun SelectLocationScreen(
                 trailingIcon = {
                     IconButton(
                         onClick = {
-                            coroutineScope.launch {
-                                sheetState.show()
-                            }
+
                         }
                     ) {
                         IconDropdown()
@@ -152,28 +143,6 @@ fun SelectLocationScreen(
             )
         }
     }
-
-    CountryPicker(
-        sheetState = sheetState,
-        backgroundContent = { /*TODO*/ },
-        countrySearchQuery = countrySearchQuery,
-        onCountrySelected = {
-            countrySelected = it
-            coroutineScope.launch {
-                sheetState.hide()
-            }
-        },
-        countryList = DummyDataCountry.countryList().filter {
-            it.name.contains(
-                other = countrySearchQuery,
-                ignoreCase = true
-            )
-        },
-        onQueryUpdated = {
-            countrySearchQuery = it
-        }
-    )
-
 }
 
 @Composable

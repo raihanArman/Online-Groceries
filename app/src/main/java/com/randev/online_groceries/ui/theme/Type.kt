@@ -47,6 +47,10 @@ val typography = Typography(
         fontFamily = GiiroySemiBold,
         fontSize = 13.sp
     ),
+    h4 = TextStyle(
+        fontFamily = GiiroyBold,
+        fontSize = 13.sp
+    ),
     subtitle1 = TextStyle(
         fontFamily = GiiroyMedium,
         fontSize = 15.sp

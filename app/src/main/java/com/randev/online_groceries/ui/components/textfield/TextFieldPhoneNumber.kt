@@ -23,6 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.randev.online_groceries.R
+import com.randev.online_groceries.data.Country
+import com.randev.online_groceries.data.DummyDataCountry
 import com.randev.online_groceries.ui.core.VerticalSpace
 import com.randev.online_groceries.ui.theme.BorderColor
 import com.randev.online_groceries.ui.theme.OnlineGroceriesTheme
@@ -38,8 +40,9 @@ fun TextFieldPhoneNumber(
     modifier: Modifier = Modifier,
     title: String ?= null,
     text: String,
+    country: Country,
     onTextChanged: (String) -> Unit,
-    onFlagClick: () -> Unit,
+    onFlagClick: (Country) -> Unit,
     backgroundColor: Color = Color.White,
     readOnly: Boolean = false
 ) {
@@ -69,12 +72,12 @@ fun TextFieldPhoneNumber(
                         .width(33.dp)
                         .height(23.dp)
                         .clickable {
-                            onFlagClick()
+                            onFlagClick(country)
                         },
                     contentAlignment = Alignment.Center
                 ){
                     Image(
-                        painter = painterResource(id = R.drawable.flag),
+                        painter = painterResource(id = country.flag),
                         contentScale = ContentScale.Fit,
                         contentDescription = null,
                     )
@@ -94,7 +97,8 @@ fun PreviewEditTextPhoneNumber() {
         TextFieldPhoneNumber(
             text = "",
             onTextChanged = {},
-            onFlagClick = {}
+            onFlagClick = {},
+            country = DummyDataCountry.countryList()[0]
         )
     }
 }
