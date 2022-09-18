@@ -16,4 +16,11 @@ sealed class Screen(
     object FieldOtp: Screen("field_otp")
     object SelectLocation: Screen("select_location")
     object Dashboard: Screen("dashboard")
+
+    //Dashboard
+    object Home: Screen("home")
+    object Explore: Screen("screen")
+    object Cart: Screen("cart")
+    object Favorite: Screen("favorite")
+    object Account: Screen("account")
 }

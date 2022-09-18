@@ -6,15 +6,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.randev.online_groceries.feature.screen.auth.field.NumberFieldScreen
-import com.randev.online_groceries.feature.screen.auth.field.OtpFieldScreen
-import com.randev.online_groceries.feature.screen.auth.location.SelectLocationScreen
-import com.randev.online_groceries.feature.screen.auth.sign_in.SignInScreen
-import com.randev.online_groceries.feature.screen.auth.sign_in_form.SignInFormScreen
-import com.randev.online_groceries.feature.screen.auth.sign_up.SignUpFormScreen
-import com.randev.online_groceries.feature.screen.dashboard.DashboardScreen
-import com.randev.online_groceries.feature.screen.onboard.OnBoardScreen
-import com.randev.online_groceries.feature.screen.splash.SplashScreen
+import com.randev.online_groceries.screen.auth.field.NumberFieldScreen
+import com.randev.online_groceries.screen.auth.field.OtpFieldScreen
+import com.randev.online_groceries.screen.auth.location.SelectLocationScreen
+import com.randev.online_groceries.screen.auth.sign_in.SignInScreen
+import com.randev.online_groceries.screen.auth.sign_in_form.SignInFormScreen
+import com.randev.online_groceries.screen.auth.sign_up.SignUpFormScreen
+import com.randev.online_groceries.screen.dashboard.DashboardScreen
+import com.randev.online_groceries.screen.onboard.OnBoardScreen
+import com.randev.online_groceries.screen.splash.SplashScreen
 
 /**
  * @author Raihan Arman
