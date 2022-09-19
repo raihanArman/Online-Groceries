@@ -19,6 +19,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.randev.online_groceries.R
+import com.randev.online_groceries.navigation.Screen
 import com.randev.online_groceries.navigation.setupDashboardBottomNavScreens
 import com.randev.online_groceries.ui.theme.OnlineGroceriesTheme
 
@@ -59,6 +60,7 @@ fun DashboardScreen(
                         label = "Home",
                         onClick = {
                             currentSelectedItem = DashboardBottomBarItemType.HOME
+                            navController.navigate(Screen.Home.route)
                         }
                     ),
                     DashboardBottomBarItem(
@@ -75,6 +77,7 @@ fun DashboardScreen(
                         label = "Explore",
                         onClick = {
                             currentSelectedItem = DashboardBottomBarItemType.EXPLORE
+                            navController.navigate(Screen.Explore.route)
                         }
                     ),
                     DashboardBottomBarItem(
@@ -92,6 +95,7 @@ fun DashboardScreen(
                         notifCount = 5,
                         onClick = {
                             currentSelectedItem = DashboardBottomBarItemType.CART
+                            navController.navigate(Screen.Cart.route)
                         }
                     ),
                     DashboardBottomBarItem(
@@ -108,6 +112,7 @@ fun DashboardScreen(
                         label = "Favorite",
                         onClick = {
                             currentSelectedItem = DashboardBottomBarItemType.FAVORITE
+                            navController.navigate(Screen.Favorite.route)
                         }
                     ),
                     DashboardBottomBarItem(
@@ -124,6 +129,7 @@ fun DashboardScreen(
                         label = "Account",
                         onClick = {
                             currentSelectedItem = DashboardBottomBarItemType.ACCOUNT
+                            navController.navigate(Screen.Account.route)
                         }
                     ),
                 )
