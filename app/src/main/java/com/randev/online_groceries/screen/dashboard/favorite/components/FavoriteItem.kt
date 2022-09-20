@@ -42,7 +42,7 @@ fun FavoriteItem(
     product: Product
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(115.dp)
     ){

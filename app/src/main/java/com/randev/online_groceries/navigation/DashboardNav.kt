@@ -4,6 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.randev.online_groceries.feature.screen.dashboard.HomeScreen
+import com.randev.online_groceries.screen.dashboard.cart.CartScreen
 import com.randev.online_groceries.screen.dashboard.explore.ExploreScreen
 import com.randev.online_groceries.screen.dashboard.favorite.FavoriteScreen
 
@@ -26,6 +27,8 @@ fun NavGraphBuilder.setupDashboardBottomNavScreens(){
         composable(Screen.Favorite.route){
             FavoriteScreen()
         }
-
+        composable(Screen.Cart.route) {
+            CartScreen()
+        }
     }
 }
