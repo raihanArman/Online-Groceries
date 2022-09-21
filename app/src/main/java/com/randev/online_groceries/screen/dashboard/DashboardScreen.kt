@@ -145,7 +145,7 @@ fun DashboardScreen(
                     navController = navController,
                     startDestination = "dashboardBottomNav"
                 ){
-                    setupDashboardBottomNavScreens()
+                    setupDashboardBottomNavScreens(navHostController)
                 }
             }
         }

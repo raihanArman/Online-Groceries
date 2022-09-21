@@ -1,5 +1,7 @@
 package com.randev.online_groceries.navigation
 
+import com.randev.online_groceries.utils.DETAILS_ARGUMENT_KEY
+
 /**
  * @author Raihan Arman
  * @date 16/09/22
@@ -16,6 +18,11 @@ sealed class Screen(
     object FieldOtp: Screen("field_otp")
     object SelectLocation: Screen("select_location")
     object Dashboard: Screen("dashboard")
+    object Details: Screen("details/{$DETAILS_ARGUMENT_KEY}"){
+        fun passProductId(productId: Int): String {
+            return "details/$productId"
+        }
+    }
 
     //Dashboard
     object Home: Screen("home")

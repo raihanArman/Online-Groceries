@@ -30,7 +30,7 @@ object DummyDataProduct {
             review = 4.5
         ),
         Product(
-            id = 1,
+            id = 2,
             name = "Tomato",
             image = R.drawable.tomato,
             unit = "1pcs",
@@ -40,7 +40,7 @@ object DummyDataProduct {
             review = 4.5
         ),
         Product(
-            id = 1,
+            id = 3,
             name = "Beef",
             image = R.drawable.beef,
             unit = "2pcs",

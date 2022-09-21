@@ -9,3 +9,5 @@ import androidx.compose.ui.unit.dp
 
 
 val EXTRA_SMALL_PADDING = 6.dp
+
+const val DETAILS_ARGUMENT_KEY = "productId"

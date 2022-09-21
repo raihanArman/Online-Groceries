@@ -1,4 +1,4 @@
-package com.randev.online_groceries.screen.dashboard.detail.components
+package com.randev.online_groceries.screen.detail.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box

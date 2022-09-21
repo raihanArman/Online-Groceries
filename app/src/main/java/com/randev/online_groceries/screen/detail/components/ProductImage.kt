@@ -1,4 +1,4 @@
-package com.randev.online_groceries.screen.dashboard.detail.components
+package com.randev.online_groceries.screen.detail.components
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -47,7 +47,8 @@ import com.randev.online_groceries.utils.fastblur
 @Composable
 fun ProductImage(
     modifier: Modifier = Modifier,
-    product: Product
+    product: Product,
+    onBack: () -> Unit = {}
 ) {
 
     Surface(
@@ -78,7 +79,7 @@ fun ProductImage(
             IconButton(
                 modifier = Modifier
                     .size(18.dp),
-                onClick = {}
+                onClick = onBack
             ) {
                 Icon(
                     painterResource(id = R.drawable.ic_baseline_arrow_back_ios_new_24),

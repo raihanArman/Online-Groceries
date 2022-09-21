@@ -1,4 +1,4 @@
-package com.randev.online_groceries.screen.dashboard.detail.components
+package com.randev.online_groceries.screen.detail.components
 
 import android.util.Log
 import androidx.compose.animation.animateContentSize

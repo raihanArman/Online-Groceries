@@ -2,6 +2,7 @@ package com.randev.online_groceries.screen.dashboard.home.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,13 +47,17 @@ import com.randev.online_groceries.ui.theme.Shapes
 @Composable
 fun ProductItem(
     modifier: Modifier = Modifier,
-    product: Product
+    product: Product,
+    onClick: (Product) -> Unit = {}
 ) {
     Card(
         modifier = modifier
             .width(174.dp)
             .height(249.dp)
-            .padding(end = 16.dp),
+            .padding(end = 16.dp)
+            .clickable {
+                onClick(product)
+            },
         border = BorderStroke(1.dp, color = BorderColor),
         backgroundColor = Color.White,
         elevation = 0.dp,

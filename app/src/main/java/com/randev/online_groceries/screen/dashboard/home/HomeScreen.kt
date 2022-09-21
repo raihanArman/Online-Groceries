@@ -20,10 +20,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.randev.online_groceries.R
 import com.randev.online_groceries.data.DummyDataBanner
 import com.randev.online_groceries.data.DummyDataCategory
@@ -46,7 +48,9 @@ import com.randev.online_groceries.ui.theme.ThirdColor
  */
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navHostController: NavHostController
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -72,7 +76,8 @@ fun HomeScreen() {
             item {
                 ExclusiveOfferSection(
                     productList = DummyDataProduct.productList(),
-                    onClick = {}
+                    onClick = {},
+                    navHostController = navHostController
                 )
             }
             item {
@@ -93,6 +98,7 @@ fun HomeScreen() {
 @Composable
 fun PreviewHomeScreen() {
     OnlineGroceriesTheme {
-        HomeScreen()
+        val navHostController = NavHostController(LocalContext.current)
+        HomeScreen(navHostController = navHostController)
     }
 }

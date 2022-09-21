@@ -31,6 +31,7 @@ fun SocialMediaButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     text: String,
+    textColor: Color = Color.White,
     imageResource: Int,
     backgroundColor: Color
 ) {
@@ -55,6 +56,7 @@ fun SocialMediaButton(
                     .weight(1f)
                     .fillMaxWidth(),
                 text = text,
+                color = textColor,
                 textAlign = TextAlign.Center
             )
         }
