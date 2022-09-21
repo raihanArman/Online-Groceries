@@ -14,7 +14,7 @@ data class Product(
     val price: String,
     val description: String,
     val nutrition: String,
-    val review: Float
+    val review: Double
 )
 
 object DummyDataProduct {
@@ -25,9 +25,9 @@ object DummyDataProduct {
             image = R.drawable.banana,
             unit = "7pcs",
             price = "\$4.99",
-            description = "Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.",
+            description = "Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet. Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet. Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet. Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.",
             nutrition = "100gr",
-            review = 4.5f
+            review = 4.5
         ),
         Product(
             id = 1,
@@ -37,7 +37,7 @@ object DummyDataProduct {
             price = "\$4.99",
             description = "Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.",
             nutrition = "100gr",
-            review = 4.5f
+            review = 4.5
         ),
         Product(
             id = 1,
@@ -47,7 +47,7 @@ object DummyDataProduct {
             price = "\$4.99",
             description = "Apples are nutritious. Apples may be good for weight loss. apples may be good for your heart. As part of a healtful and varied diet.",
             nutrition = "100gr",
-            review = 4.5f
+            review = 4.5
         ),
     )
 }

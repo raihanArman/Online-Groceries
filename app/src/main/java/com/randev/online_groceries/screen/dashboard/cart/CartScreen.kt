@@ -20,6 +20,7 @@ import com.randev.online_groceries.data.DummyDataProduct
 import com.randev.online_groceries.screen.dashboard.cart.components.CartItem
 import com.randev.online_groceries.ui.components.PrimaryButton
 import com.randev.online_groceries.ui.components.appbar.MainTopBar
+import com.randev.online_groceries.ui.components.badge.BadgeCustom
 import com.randev.online_groceries.ui.theme.OnlineGroceriesTheme
 
 /**
@@ -52,19 +53,7 @@ fun CartScreen() {
                 text = "Go to Checkout",
                 onClick = {},
                 badge = {
-                    Surface(
-                        shape = RoundedCornerShape(4.dp),
-                        color = Color.Black.copy(alpha = 0.2f)
-                    ){
-                        Text(
-                            text = "\$12.96",
-                            color = Color.White,
-                            fontFamily = MaterialTheme.typography.h3.fontFamily,
-                            fontSize = 12.sp,
-                            modifier = Modifier
-                                .padding(4.dp)
-                        )
-                    }
+                    BadgeCustom(text =  "\$12.96", textSize = 12.sp)
                 }
             )
         }
