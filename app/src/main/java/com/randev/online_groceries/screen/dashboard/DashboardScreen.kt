@@ -4,8 +4,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -20,7 +23,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.randev.online_groceries.R
 import com.randev.online_groceries.navigation.Screen
+import com.randev.online_groceries.navigation.navigateAndReplaceStartRoute
 import com.randev.online_groceries.navigation.setupDashboardBottomNavScreens
+import com.randev.online_groceries.screen.checkout.CheckoutBottomSheet
 import com.randev.online_groceries.ui.theme.OnlineGroceriesTheme
 
 /**
@@ -28,6 +33,7 @@ import com.randev.online_groceries.ui.theme.OnlineGroceriesTheme
  * @date 16/09/22
  */
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DashboardScreen(
     navHostController: NavHostController
@@ -38,8 +44,8 @@ fun DashboardScreen(
         )
     }
     val iconSize = remember { 24.dp }
-
-    val navController = rememberNavController()
+    val dashboardNav = rememberNavController()
+    val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
 
     Scaffold(
         bottomBar = {
@@ -60,7 +66,7 @@ fun DashboardScreen(
                         label = "Home",
                         onClick = {
                             currentSelectedItem = DashboardBottomBarItemType.HOME
-                            navController.navigate(Screen.Home.route)
+                            dashboardNav.navigateAndReplaceStartRoute(Screen.Home.route)
                         }
                     ),
                     DashboardBottomBarItem(
@@ -77,7 +83,7 @@ fun DashboardScreen(
                         label = "Explore",
                         onClick = {
                             currentSelectedItem = DashboardBottomBarItemType.EXPLORE
-                            navController.navigate(Screen.Explore.route)
+                            dashboardNav.navigateAndReplaceStartRoute(Screen.Explore.route)
                         }
                     ),
                     DashboardBottomBarItem(
@@ -95,7 +101,7 @@ fun DashboardScreen(
                         notifCount = 5,
                         onClick = {
                             currentSelectedItem = DashboardBottomBarItemType.CART
-                            navController.navigate(Screen.Cart.route)
+                            dashboardNav.navigateAndReplaceStartRoute(Screen.Cart.route)
                         }
                     ),
                     DashboardBottomBarItem(
@@ -112,7 +118,7 @@ fun DashboardScreen(
                         label = "Favorite",
                         onClick = {
                             currentSelectedItem = DashboardBottomBarItemType.FAVORITE
-                            navController.navigate(Screen.Favorite.route)
+                            dashboardNav.navigateAndReplaceStartRoute(Screen.Favorite.route)
                         }
                     ),
                     DashboardBottomBarItem(
@@ -129,7 +135,7 @@ fun DashboardScreen(
                         label = "Account",
                         onClick = {
                             currentSelectedItem = DashboardBottomBarItemType.ACCOUNT
-                            navController.navigate(Screen.Account.route)
+                            dashboardNav.navigateAndReplaceStartRoute(Screen.Account.route)
                         }
                     ),
                 )
@@ -142,14 +148,21 @@ fun DashboardScreen(
                     .padding(bottom = it.calculateBottomPadding())
             ) {
                 NavHost(
-                    navController = navController,
+                    navController = dashboardNav,
                     startDestination = "dashboardBottomNav"
                 ){
-                    setupDashboardBottomNavScreens(navHostController)
+                    setupDashboardBottomNavScreens(navHostController, sheetState)
                 }
             }
         }
     )
+
+    CheckoutBottomSheet(
+        sheetState = sheetState,
+        backgroundContent = {},
+        navHostController = navHostController
+    )
+
 }
 
 @Preview

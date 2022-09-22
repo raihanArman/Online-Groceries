@@ -1,5 +1,7 @@
 package com.randev.online_groceries.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -15,8 +17,10 @@ import com.randev.online_groceries.screen.dashboard.profile.ProfileScreen
  * @date 18/09/22
  */
 
+@OptIn(ExperimentalMaterialApi::class)
 fun NavGraphBuilder.setupDashboardBottomNavScreens(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    sheetState: ModalBottomSheetState
 ){
     navigation(
         startDestination = Screen.Home.route,
@@ -32,7 +36,7 @@ fun NavGraphBuilder.setupDashboardBottomNavScreens(
             FavoriteScreen()
         }
         composable(Screen.Cart.route) {
-            CartScreen()
+            CartScreen(sheetState)
         }
         composable(Screen.Account.route) {
             ProfileScreen()

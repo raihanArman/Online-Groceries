@@ -15,6 +15,7 @@ import com.randev.online_groceries.screen.auth.location.SelectLocationScreen
 import com.randev.online_groceries.screen.auth.sign_in.SignInScreen
 import com.randev.online_groceries.screen.auth.sign_in_form.SignInFormScreen
 import com.randev.online_groceries.screen.auth.sign_up.SignUpFormScreen
+import com.randev.online_groceries.screen.checkout.OrderAcceptedScreen
 import com.randev.online_groceries.screen.dashboard.DashboardScreen
 import com.randev.online_groceries.screen.detail.DetailScreen
 import com.randev.online_groceries.screen.onboard.OnBoardScreen
@@ -69,6 +70,9 @@ fun SetupNavGraph(
         ){
             val id = it.arguments?.getInt(DETAILS_ARGUMENT_KEY) ?: 99
             DetailScreen(navController, id)
+        }
+        composable(route = Screen.OrderAccepted.route){
+            OrderAcceptedScreen(navController)
         }
     }
 }

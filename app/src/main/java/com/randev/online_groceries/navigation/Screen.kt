@@ -23,6 +23,7 @@ sealed class Screen(
             return "details/$productId"
         }
     }
+    object OrderAccepted: Screen("order_accepted")
 
     //Dashboard
     object Home: Screen("home")
