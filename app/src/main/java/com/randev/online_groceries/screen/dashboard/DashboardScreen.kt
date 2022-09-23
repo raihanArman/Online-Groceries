@@ -50,10 +50,10 @@ fun DashboardScreen(
     Scaffold(
         bottomBar = {
             DashboardBottomBar(
+                navController = dashboardNav,
                 isDisplayed = true,
                 bottomBarItems = listOf(
                     DashboardBottomBarItem(
-                        isSelected = currentSelectedItem == DashboardBottomBarItemType.HOME,
                         icon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_home),
@@ -64,13 +64,9 @@ fun DashboardScreen(
                         },
                         type = DashboardBottomBarItemType.HOME,
                         label = "Home",
-                        onClick = {
-                            currentSelectedItem = DashboardBottomBarItemType.HOME
-                            dashboardNav.navigateAndReplaceStartRoute(Screen.Home.route)
-                        }
+                        route = Screen.Home.route
                     ),
                     DashboardBottomBarItem(
-                        isSelected = currentSelectedItem == DashboardBottomBarItemType.EXPLORE,
                         icon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_explore),
@@ -81,13 +77,9 @@ fun DashboardScreen(
                         },
                         type = DashboardBottomBarItemType.EXPLORE,
                         label = "Explore",
-                        onClick = {
-                            currentSelectedItem = DashboardBottomBarItemType.EXPLORE
-                            dashboardNav.navigateAndReplaceStartRoute(Screen.Explore.route)
-                        }
+                        route = Screen.Explore.route
                     ),
                     DashboardBottomBarItem(
-                        isSelected = currentSelectedItem == DashboardBottomBarItemType.CART,
                         icon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_cart),
@@ -99,13 +91,9 @@ fun DashboardScreen(
                         type = DashboardBottomBarItemType.CART,
                         label = "Cart",
                         notifCount = 5,
-                        onClick = {
-                            currentSelectedItem = DashboardBottomBarItemType.CART
-                            dashboardNav.navigateAndReplaceStartRoute(Screen.Cart.route)
-                        }
+                        route = Screen.Cart.route
                     ),
                     DashboardBottomBarItem(
-                        isSelected = currentSelectedItem == DashboardBottomBarItemType.FAVORITE,
                         icon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_favorite),
@@ -116,13 +104,9 @@ fun DashboardScreen(
                         },
                         type = DashboardBottomBarItemType.FAVORITE,
                         label = "Favorite",
-                        onClick = {
-                            currentSelectedItem = DashboardBottomBarItemType.FAVORITE
-                            dashboardNav.navigateAndReplaceStartRoute(Screen.Favorite.route)
-                        }
+                        route = Screen.Favorite.route
                     ),
                     DashboardBottomBarItem(
-                        isSelected = currentSelectedItem == DashboardBottomBarItemType.ACCOUNT,
                         icon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_account),
@@ -133,10 +117,7 @@ fun DashboardScreen(
                         },
                         type = DashboardBottomBarItemType.ACCOUNT,
                         label = "Account",
-                        onClick = {
-                            currentSelectedItem = DashboardBottomBarItemType.ACCOUNT
-                            dashboardNav.navigateAndReplaceStartRoute(Screen.Account.route)
-                        }
+                        route = Screen.Account.route
                     ),
                 )
             )

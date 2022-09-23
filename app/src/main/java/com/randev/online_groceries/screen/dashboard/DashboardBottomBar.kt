@@ -26,7 +26,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.randev.online_groceries.R
+import com.randev.online_groceries.navigation.Screen
 import com.randev.online_groceries.ui.theme.OnlineGroceriesTheme
 import com.randev.online_groceries.ui.theme.PrimaryColor
 
@@ -40,12 +44,11 @@ enum class DashboardBottomBarItemType {
 }
 
 data class DashboardBottomBarItem(
-    val isSelected: Boolean,
     val icon: @Composable () -> Unit,
     val label: String,
     val notifCount: Int? = null,
-    val onClick: () -> Unit,
-    val type: DashboardBottomBarItemType
+    val type: DashboardBottomBarItemType,
+    val route: String
 )
 
 val BottomNavigationHeight = 56.dp
@@ -53,7 +56,8 @@ val BottomNavigationHeight = 56.dp
 @Composable
 fun DashboardBottomBar(
     isDisplayed: Boolean,
-    bottomBarItems: List<DashboardBottomBarItem>
+    bottomBarItems: List<DashboardBottomBarItem>,
+    navController: NavHostController
 ) {
 
     val surfaceColor = Color.White
@@ -64,6 +68,8 @@ fun DashboardBottomBar(
         enter = slideInVertically(animationSpec = tween(), initialOffsetY = {it}),
         exit = slideOutVertically(animationSpec = tween(), targetOffsetY = {it})
     ) {
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
        BottomNavigation(
            backgroundColor = surfaceColor,
            contentColor = contentColor,
@@ -81,8 +87,10 @@ fun DashboardBottomBar(
                }
 
                BottomNavigationItem(
-                   selected = item.isSelected,
-                   onClick = item.onClick,
+                   selected = currentRoute == item.route,
+                   onClick = {
+                       navController.navigate(item.route)
+                   },
                    icon = {
                        IconIndicator(
                            count = item.notifCount,
@@ -112,18 +120,14 @@ fun DashboardBottomBar(
 @Composable
 fun PreviewDashboardBottomBar() {
     OnlineGroceriesTheme() {
-        var currentSelectedItem: DashboardBottomBarItemType by remember {
-            mutableStateOf(
-                DashboardBottomBarItemType.HOME
-            )
-        }
         val iconSize = remember { 24.dp }
+        val navHostController = rememberNavController()
 
         DashboardBottomBar(
+            navController = navHostController,
             isDisplayed = true,
             bottomBarItems = listOf(
                 DashboardBottomBarItem(
-                    isSelected = currentSelectedItem == DashboardBottomBarItemType.HOME,
                     icon = {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_home),
@@ -134,12 +138,9 @@ fun PreviewDashboardBottomBar() {
                     },
                     type = DashboardBottomBarItemType.HOME,
                     label = "Home",
-                    onClick = {
-                        currentSelectedItem = DashboardBottomBarItemType.HOME
-                    }
+                    route = Screen.Home.route
                 ),
                 DashboardBottomBarItem(
-                    isSelected = currentSelectedItem == DashboardBottomBarItemType.EXPLORE,
                     icon = {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_explore),
@@ -150,12 +151,9 @@ fun PreviewDashboardBottomBar() {
                     },
                     type = DashboardBottomBarItemType.EXPLORE,
                     label = "Explore",
-                    onClick = {
-                        currentSelectedItem = DashboardBottomBarItemType.EXPLORE
-                    }
+                    route = Screen.Explore.route
                 ),
                 DashboardBottomBarItem(
-                    isSelected = currentSelectedItem == DashboardBottomBarItemType.CART,
                     icon = {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_cart),
@@ -167,12 +165,9 @@ fun PreviewDashboardBottomBar() {
                     type = DashboardBottomBarItemType.CART,
                     label = "Cart",
                     notifCount = 5,
-                    onClick = {
-                        currentSelectedItem = DashboardBottomBarItemType.CART
-                    }
+                    route = Screen.Cart.route
                 ),
                 DashboardBottomBarItem(
-                    isSelected = currentSelectedItem == DashboardBottomBarItemType.FAVORITE,
                     icon = {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_favorite),
@@ -183,12 +178,9 @@ fun PreviewDashboardBottomBar() {
                     },
                     type = DashboardBottomBarItemType.FAVORITE,
                     label = "Favorite",
-                    onClick = {
-                        currentSelectedItem = DashboardBottomBarItemType.FAVORITE
-                    }
+                    route = Screen.Favorite.route
                 ),
                 DashboardBottomBarItem(
-                    isSelected = currentSelectedItem == DashboardBottomBarItemType.ACCOUNT,
                     icon = {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_account),
@@ -199,9 +191,7 @@ fun PreviewDashboardBottomBar() {
                     },
                     type = DashboardBottomBarItemType.ACCOUNT,
                     label = "Account",
-                    onClick = {
-                        currentSelectedItem = DashboardBottomBarItemType.ACCOUNT
-                    }
+                    route = Screen.Account.route
                 ),
             )
         )

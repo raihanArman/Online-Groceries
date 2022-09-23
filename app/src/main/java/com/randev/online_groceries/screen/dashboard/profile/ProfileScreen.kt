@@ -86,6 +86,7 @@ fun ProfileScreen() {
                     backgroundColor = BorderColor,
                     textColor = PrimaryColor
                 )
+                VerticalSpace(height = 20.dp)
             }
         }
     }
