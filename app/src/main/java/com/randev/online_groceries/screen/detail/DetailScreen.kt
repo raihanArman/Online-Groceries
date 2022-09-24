@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.randev.online_groceries.data.DummyDataProduct
 import com.randev.online_groceries.data.Product
 import com.randev.online_groceries.screen.detail.components.CounterSection
@@ -75,7 +76,7 @@ fun DetailScreen(
                         modifier = Modifier
                             .background(Color.White)
                             .padding(
-                                start = 25.dp,
+                                start = 10.dp,
                                 top = 25.dp,
                                 end = 25.dp
                             )
@@ -97,6 +98,7 @@ fun DetailScreen(
 @Composable
 fun PreviewDetailScreen() {
     OnlineGroceriesTheme {
-//        DetailScreen()
+        val navHostController = rememberNavController()
+        DetailScreen(navHostController, 1)
     }
 }

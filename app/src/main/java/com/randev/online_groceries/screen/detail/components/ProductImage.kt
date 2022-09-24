@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.util.LruCache
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -25,6 +26,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.asImageBitmap
@@ -54,13 +61,16 @@ fun ProductImage(
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .height(372.dp),
-        shape = RoundedCornerShape(bottomEnd = 16.dp, bottomStart = 16.dp)
+            .height(372.dp)
+            .padding(bottom = 20.dp),
+        shape = RoundedCornerShape(bottomEnd = 16.dp, bottomStart = 16.dp),
+        elevation = 10.dp,
     ) {
 
         Box(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .blur(50.dp),
             contentAlignment = Alignment.Center
         ){
             Image(
@@ -97,6 +107,27 @@ fun ProductImage(
                 )
             }
         }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .alpha(1f)
+                .blur(
+                    edgeTreatment = BlurredEdgeTreatment.Unbounded,
+                    radius = 28.dp
+                )
+                .background(
+                    Brush.radialGradient(
+                        listOf(
+                            Color(0x12FFFFFF),
+                            Color(0xDFFFFFF),
+                            Color(0x9FFFFFFF)
+                        ),
+                        radius = 2200f,
+                        center = Offset.Infinite
+                    )
+                )
+        )
+
     }
 }
 
