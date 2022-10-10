@@ -39,7 +39,7 @@ import com.randev.online_groceries.ui.theme.TextGreyColor
 fun TextFieldPhoneNumber(
     modifier: Modifier = Modifier,
     title: String ?= null,
-    text: String,
+    text: () -> String,
     country: Country,
     onTextChanged: (String) -> Unit,
     onFlagClick: (Country) -> Unit,
@@ -59,7 +59,7 @@ fun TextFieldPhoneNumber(
         TextField(
             modifier = Modifier
                 .fillMaxWidth(),
-            value = text,
+            value = text(),
             onValueChange = onTextChanged,
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = backgroundColor,
@@ -95,7 +95,7 @@ fun TextFieldPhoneNumber(
 fun PreviewEditTextPhoneNumber() {
     OnlineGroceriesTheme {
         TextFieldPhoneNumber(
-            text = "",
+            text = { "Kevin" },
             onTextChanged = {},
             onFlagClick = {},
             country = DummyDataCountry.countryList()[0]
