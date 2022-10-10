@@ -1,5 +1,8 @@
 # Online Groceries
 
+## :scroll: Description
+This is sample Groceries app UI building with jetpack compose
+
 ## :camera_flash: Screenshots
 <p float="center">
     <img width="200" src="https://user-images.githubusercontent.com/42885960/191986855-81c02bf7-7c5e-44f7-8c56-308d1840d2db.png">
